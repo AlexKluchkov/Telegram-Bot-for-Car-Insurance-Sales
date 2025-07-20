@@ -1,13 +1,8 @@
-﻿using Microsoft.VisualBasic;
 using Mindee;
 using Mindee.Http;
 using Mindee.Input;
 using Mindee.Product.Generated;
 using Mindee.Product.Passport;
-using SkiaSharp;
-using System.IO;
-using System.IO.Pipes;
-using System.Reflection;
 using Telegram.Bot;
 using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
