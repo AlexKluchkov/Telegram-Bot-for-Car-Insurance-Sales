@@ -1,7 +1,7 @@
 # Use the official .NET SDK for assembly
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
-WORKDIR ./
+WORKDIR .
 
 # Copy csproj and restore dependencies
 COPY *.csproj ./
@@ -13,7 +13,7 @@ RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/runtime:8.0 AS runtime
 
-WORKDIR ./
+WORKDIR .
 COPY --from=build /out ./
 
 # Launch the application
