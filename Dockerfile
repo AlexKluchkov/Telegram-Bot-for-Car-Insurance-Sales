@@ -1,7 +1,7 @@
 # Use the official .NET SDK for assembly
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
-WORKDIR /app
+WORKDIR ./
 
 # Copy csproj and restore dependencies
 COPY *.csproj ./
