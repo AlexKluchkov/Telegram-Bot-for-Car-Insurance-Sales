@@ -1,20 +1,20 @@
-# Use the official .NET SDK for assembly
+# Assembly stage
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
 
-WORKDIR .
-
-# Copy csproj and restore dependencies
+# Copy project files and restore dependencies
 COPY *.csproj ./
 RUN dotnet restore
 
-# Copy all the rest of the code and compile
+# Copy everything else and publish
 COPY . ./
-RUN dotnet publish -c Release -o out
+RUN dotnet publish -c Release -o /app/publish
 
+# Execution stage
 FROM mcr.microsoft.com/dotnet/runtime:8.0 AS runtime
+WORKDIR /app
 
-WORKDIR .
-COPY --from=build /out ./
+COPY --from=build /app/publish ./
 
-# Launch the application
+# Entry point
 ENTRYPOINT ["dotnet", "TelegramBot.dll"]
