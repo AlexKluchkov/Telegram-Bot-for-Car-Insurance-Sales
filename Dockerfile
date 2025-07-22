@@ -13,4 +13,4 @@ WORKDIR /app
 
 COPY --from=build /app/publish ./
 
-ENTRYPOINT ["dotnet", "TelegramBot.dll"]
+ENTRYPOINT ["dotnet", "BotForCarInsuranceSales.dll"]
