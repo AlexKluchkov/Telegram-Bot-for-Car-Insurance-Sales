@@ -44,9 +44,9 @@ async Task OnMessage(Message msg, UpdateType type)
 {
     if (msg.Text == "/start")
     {
-        await bot.SendTextMessageAsync(chatId: msg.Chat.Id, text: $"Hello {msg.Chat.FirstName}! My name is {me.FirstName}!");
+        await bot.SendMessage(chatId: msg.Chat.Id, text: $"Hello {msg.Chat.FirstName}! My name is {me.FirstName}!");
         await Task.Delay(1000);
-        await bot.SendTextMessageAsync(chatId: msg.Chat.Id, text: $"Please, send me a photo of your passport.");
+        await bot.SendMessage(chatId: msg.Chat.Id, text: $"Please, send me a photo of your passport.");
         qustion = 1;
         InsuranceAgreementText = File.ReadAllText(Insurance_Policy_Template_Path);
     }
@@ -88,7 +88,7 @@ async Task PhotoPassportAnalysis(ChatId id, string TmpPhoto)
     // Print a summary of all the predictions
     var ResultPassportCard = response.Document.Inference.Prediction;
 
-    await bot.SendTextMessageAsync(chatId: id, text: $"Given Name:{ResultPassportCard.GivenNames[0]}\n" +
+    await bot.SendMessage(chatId: id, text: $"Given Name:{ResultPassportCard.GivenNames[0]}\n" +
         $"Date of Birth: {ResultPassportCard.BirthDate.Value}\n" +
         $"Place of Birth: {ResultPassportCard.BirthPlace.Value}\n" +
         $"Country Code: {ResultPassportCard.Country.Value}\n" +
@@ -96,7 +96,7 @@ async Task PhotoPassportAnalysis(ChatId id, string TmpPhoto)
         $"Gender: {ResultPassportCard.Gender.Value}");
     PassportName = ResultPassportCard.GivenNames[0].ToString();
 
-    await bot.SendTextMessageAsync(id, "Is the data provided correctly?",
+    await bot.SendMessage(id, "Is the data provided correctly?",
             replyMarkup: new InlineKeyboardButton[] { "Yes", "No" });
 }
 
@@ -127,7 +127,7 @@ async Task PhotoVehicleCardAnalysis(ChatId id, string TmpPhoto)
     //When working with Custom API, I can`t split the report into fields.
     foreach (var field in response.Document.Inference.Prediction.Fields)
     {
-        await bot.SendTextMessageAsync(chatId: id, $"{field.Key}: {field.Value}");
+        await bot.SendMessage(chatId: id, $"{field.Key}: {field.Value}");
         if(field.Key == "registration_date")
         {
             VehicleCardRegistrationDate = field.Value.ToString();
@@ -142,13 +142,13 @@ async Task PhotoVehicleCardAnalysis(ChatId id, string TmpPhoto)
         }
     }
 
-    await bot.SendTextMessageAsync(id, "Is the data provided correctly?",
+    await bot.SendMessage(id, "Is the data provided correctly?",
             replyMarkup: new InlineKeyboardButton[] { "Yes", "No" });
 }
 
 async Task PriceQuotation(ChatId id)
 {
-    await bot.SendTextMessageAsync(id, "The fixed price for insurance is 100 USD. Do you agree with the price?",
+    await bot.SendMessage(id, "The fixed price for insurance is 100 USD. Do you agree with the price?",
             replyMarkup: new InlineKeyboardButton[] { "Yes", "No" });
 }
 
@@ -160,7 +160,7 @@ async Task Insurance_Policy_Issuance(ChatId id)
     }
 
     using var fileStream = File.OpenRead(Insurance_Policy_Path);
-    await bot.SendDocumentAsync(
+    await bot.SendDocument(
         chatId: id,
         document: fileStream
     );
@@ -173,13 +173,13 @@ async Task OnUpdate(Update update)
     {
         if ((query.Data == "Так") && (qustion == 1))
         {
-            await bot.SendTextMessageAsync(chatId: query.Message!.Chat.Id, text: $"Please send a photo of your driver's license.");
+            await bot.SendMessage(chatId: query.Message!.Chat.Id, text: $"Please send a photo of your driver's license.");
             qustion = 2;
             InsuranceAgreementText = InsuranceAgreementText.Replace("[Name of insured person]", PassportName);
         }
         else if((query.Data == "Ні")&& (qustion == 1))
         {
-            await bot.SendTextMessageAsync(chatId: query.Message!.Chat.Id, text: $"Send your passport photo again.");
+            await bot.SendMessage(chatId: query.Message!.Chat.Id, text: $"Send your passport photo again.");
         }
         else if ((query.Data == "Так") && (qustion == 2))
         {
@@ -191,7 +191,7 @@ async Task OnUpdate(Update update)
         }
         else if ((query.Data == "Ні") && (qustion == 2))
         {
-            await bot.SendTextMessageAsync(chatId: query.Message!.Chat.Id, text: $"Send a photo of your vehicle card again");
+            await bot.SendMessage(chatId: query.Message!.Chat.Id, text: $"Send a photo of your vehicle card again");
         }
         else if((query.Data == "Так")&& (qustion == 3)){
             await Insurance_Policy_Issuance(query.Message!.Chat);
@@ -199,7 +199,7 @@ async Task OnUpdate(Update update)
         }
         else if ((query.Data == "Ні") && (qustion == 3))
         {
-            await bot.SendTextMessageAsync(chatId: query.Message!.Chat.Id, text: $"Unfortunately, 100 USD is the only affordable price.");
+            await bot.SendMessage(chatId: query.Message!.Chat.Id, text: $"Unfortunately, 100 USD is the only affordable price.");
         }
     }
 }
