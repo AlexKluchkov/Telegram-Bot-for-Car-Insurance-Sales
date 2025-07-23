@@ -11,7 +11,7 @@ using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
 using var cts = new CancellationTokenSource();
-var token = Environment.GetEnvironmentVariable("7392607613:AAE3AUn6I0p2AiIXD_X2MWeWFwdMgV2lPkc");
+var token = Environment.GetEnvironmentVariable("TELEGRAM_TOKEN") ?? "7392607613:AAE3AUn6I0p2AiIXD_X2MWeWFwdMgV2lPkc";
 var bot = new TelegramBotClient(token);
 string apiKey = "714cee273e7a1c105f3c3cbe2d15c17e";
 int qustion = 0;
