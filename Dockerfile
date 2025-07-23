@@ -11,4 +11,4 @@ RUN dotnet publish BotForCarInsuranceSales.csproj -c Release -o /out
 FROM mcr.microsoft.com/dotnet/runtime:8.0 AS runtime
 WORKDIR /app
 COPY --from=build /out ./
-ENTRYPOINT ["dotnet", "TelegramBot.dll"]
+ENTRYPOINT ["dotnet", "BotForCarInsuranceSales.dll"]
