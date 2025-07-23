@@ -27,11 +27,9 @@ string Insurance_Policy_Path = "Auto_Insurance_Policy.txt";
 
 var me = await bot.GetMe();
 
-botClient.StartReceiving(
-    OnError
-    OnMessage,
-    OnUpdate,
-);
+bot.OnError += OnError;
+bot.OnMessage += OnMessage;
+bot.OnUpdate += OnUpdate;
 
 await Task.Delay(-1);
 
