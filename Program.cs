@@ -25,7 +25,7 @@ string VehicleCardVehicleMake = "";
 string Insurance_Policy_Template_Path = "Auto_Insurance_Policy_Template.txt";
 string Insurance_Policy_Path = "Auto_Insurance_Policy.txt";
 
-var me = await bot.GetMeAsync();
+var me = await bot.GetMe();
 bot.OnError += OnError;
 bot.OnMessage += OnMessage;
 bot.OnUpdate += OnUpdate;
