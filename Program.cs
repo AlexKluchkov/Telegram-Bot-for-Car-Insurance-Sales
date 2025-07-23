@@ -26,9 +26,14 @@ string Insurance_Policy_Template_Path = "Auto_Insurance_Policy_Template.txt";
 string Insurance_Policy_Path = "Auto_Insurance_Policy.txt";
 
 var me = await bot.GetMe();
-bot.OnError += OnError;
-bot.OnMessage += OnMessage;
-bot.OnUpdate += OnUpdate;
+
+botClient.StartReceiving(
+    OnError
+    OnMessage,
+    OnUpdate,
+);
+
+await Task.Delay(-1);
 
 Console.WriteLine($"@{me.Username} is running... Press Enter to terminate");
 Console.ReadLine();
