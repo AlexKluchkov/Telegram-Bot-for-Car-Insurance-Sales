@@ -9,7 +9,23 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Http;
 
+// Порт Render ожидает из переменной окружения PORT
+var port = Environment.GetEnvironmentVariable("PORT") ?? "3000";
+
+var builder = WebApplication.CreateBuilder();
+var app = builder.Build();
+
+// Простой обработчик HTTP-запросов
+app.MapGet("/", () => "Bot is running");
+
+app.Run($"http://0.0.0.0:{port}");
+//!!!!!!!!!!!!!!!!!
 using var cts = new CancellationTokenSource();
 var token = Environment.GetEnvironmentVariable("TELEGRAM_TOKEN") ?? "7392607613:AAE3AUn6I0p2AiIXD_X2MWeWFwdMgV2lPkc";
 var bot = new TelegramBotClient(token);
