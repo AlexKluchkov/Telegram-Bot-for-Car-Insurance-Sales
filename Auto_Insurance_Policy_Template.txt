@@ -1,0 +1,29 @@
+AUTO INSURANCE POLICY No. [Policy Number]
+Auto Insurance Agreement (Comprehensive / Liability)
+1. INSURER
+Company Name: “Company”
+Legal Address: “Company Address”
+Tax ID / Registration No.: “Tax ID / Registration”
+Phone / Email: “Contact Information”
+2. INSURED PERSON
+Full Name: [Name of insured person]
+Relationship to Policyholder: Owner
+3. INSURED VEHICLE
+Make and Model: [e.g., Toyota Camry]
+Vehicle color: [vehicle color]
+License Plate Number: [Plate Number]
+Registration date: [registration date]
+4. INSURANCE TERMS
+Coverage Period: From [Start Date] to [End Date]
+Insured Amount: [Insured Amount]
+Territory Covered: International
+5. COVERED EVENTS
+- Road Traffic Accidents
+- Theft or Attempted Theft
+- Fire, Natural Disasters
+- Malicious Acts of Third Parties
+6. INSURANCE PREMIUM
+Total Premium Amount: [Amount in numbers and words]
+Payment Terms: [One-time / Installments]
+Payment Date: [Date]
+Note: This policy is an integral part of the insurance agreement and confirms the conclusion of the contract.
