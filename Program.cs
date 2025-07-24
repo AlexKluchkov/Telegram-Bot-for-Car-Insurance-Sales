@@ -174,17 +174,17 @@ async Task OnUpdate(Update update)
 {
     if (update is { CallbackQuery: { } query }) // non-null CallbackQuery
     {
-        if ((query.Data == "Так") && (qustion == 1))
+        if ((query.Data == "Yes") && (qustion == 1))
         {
             await bot.SendMessage(chatId: query.Message!.Chat.Id, text: $"Please send a photo of your driver's license.");
             qustion = 2;
             InsuranceAgreementText = InsuranceAgreementText.Replace("[Name of insured person]", PassportName);
         }
-        else if((query.Data == "Ні")&& (qustion == 1))
+        else if((query.Data == "No")&& (qustion == 1))
         {
             await bot.SendMessage(chatId: query.Message!.Chat.Id, text: $"Send your passport photo again.");
         }
-        else if ((query.Data == "Так") && (qustion == 2))
+        else if ((query.Data == "Yes") && (qustion == 2))
         {
             await PriceQuotation(query.Message!.Chat);
             qustion = 3;
@@ -192,7 +192,7 @@ async Task OnUpdate(Update update)
             InsuranceAgreementText = InsuranceAgreementText.Replace("[vehicle color]", VehicleCardVhicleColor);
             InsuranceAgreementText = InsuranceAgreementText.Replace("[e.g., Toyota Camry]", VehicleCardVehicleMake);
         }
-        else if ((query.Data == "Ні") && (qustion == 2))
+        else if ((query.Data == "No") && (qustion == 2))
         {
             await bot.SendMessage(chatId: query.Message!.Chat.Id, text: $"Send a photo of your vehicle card again");
         }
@@ -200,7 +200,7 @@ async Task OnUpdate(Update update)
             await Insurance_Policy_Issuance(query.Message!.Chat);
             InsuranceAgreementText = InsuranceAgreementText.Replace("[Insured Amount]", "100 USD");
         }
-        else if ((query.Data == "Ні") && (qustion == 3))
+        else if ((query.Data == "No") && (qustion == 3))
         {
             await bot.SendMessage(chatId: query.Message!.Chat.Id, text: $"Unfortunately, 100 USD is the only affordable price.");
         }
