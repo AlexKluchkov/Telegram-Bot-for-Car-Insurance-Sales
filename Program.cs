@@ -10,9 +10,6 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
-Task.Run(async () =>
-{
-
 using var cts = new CancellationTokenSource();
 var token = Environment.GetEnvironmentVariable("TELEGRAM_TOKEN") ?? "7392607613:AAE3AUn6I0p2AiIXD_X2MWeWFwdMgV2lPkc";
 var bot = new TelegramBotClient(token);
@@ -209,5 +206,3 @@ async Task OnUpdate(Update update)
         }
     }
 }
-
-});
