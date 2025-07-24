@@ -52,7 +52,7 @@ async Task OnMessage(Message msg, UpdateType type)
         await bot.SendMessage(chatId: msg.Chat.Id, text: $"Please, send me a photo of your passport.");
         qustion = 1;
         InsuranceAgreementText = File.ReadAllText(Insurance_Policy_Template_Path);
-        if (File.Exists(Insurance_Policy_Template_Path)!)
+        if (File.Exists(Insurance_Policy_Template_Path))
         {
             await bot.SendMessage(chatId: msg.Chat.Id, text: $"File exist!");
         }
