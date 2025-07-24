@@ -51,7 +51,9 @@ async Task OnMessage(Message msg, UpdateType type)
         await Task.Delay(1000);
         await bot.SendMessage(chatId: msg.Chat.Id, text: $"Please, send me a photo of your passport.");
         qustion = 1;
-        InsuranceAgreementText = File.ReadAllText(Insurance_Policy_Template_Path);
+        //InsuranceAgreementText = File.ReadAllText(Insurance_Policy_Template_Path);
+///////////////////////////////////////////////////////////////
+        InsuranceAgreementText = Environment.GetEnvironmentVariable("Auto_Insurance_Policy_Template")
     }
     if (msg.Photo != null && msg.Photo.Length > 0)
     {
