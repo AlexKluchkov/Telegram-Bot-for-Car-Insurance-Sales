@@ -5,8 +5,6 @@ WORKDIR /app
 COPY BotForCarInsuranceSales.csproj ./
 RUN dotnet restore BotForCarInsuranceSales.csproj
 
-COPY Auto_Insurance_Policy_Template.txt ./
-
 COPY . ./
 RUN dotnet publish BotForCarInsuranceSales.csproj -c Release -o /out
 
