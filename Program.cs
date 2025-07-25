@@ -23,7 +23,7 @@ string VehicleCardVhicleColor = "";
 string VehicleCardVehicleMake = "";
 
 string Insurance_Policy_Template_Path = Path.Combine(AppContext.BaseDirectory, "Auto_Insurance_Policy_Template.txt");
-string Insurance_Policy_Path = Path.Combine(AppContext.BaseDirectory, "Auto_Insurance_Policy.txt");
+string Insurance_Policy_Path = "Auto_Insurance_Policy.txt";
 
 var me = await bot.GetMe();
 
@@ -172,6 +172,17 @@ async Task Insurance_Policy_Issuance(ChatId id)
         writer.WriteLine(InsuranceAgreementText);
     }
 
+    if (File.Exists(Insurance_Policy_Path))
+    {
+        await bot.SendMessage(chatId: msg.Chat.Id, text: $"File exist!");
+        await bot.SendMessage(chatId: msg.Chat.Id, text: $"{Insurance_Policy_Path}");
+    }
+    else
+    {
+        await bot.SendMessage(chatId: msg.Chat.Id, text: $"File doesn`t exist!");
+        await bot.SendMessage(chatId: msg.Chat.Id, text: $"{Insurance_Policy_Path}");
+    }
+    
     using var fileStream = File.OpenRead(Insurance_Policy_Path);
     await bot.SendDocument(
         chatId: id,
