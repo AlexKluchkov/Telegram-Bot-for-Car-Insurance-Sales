@@ -51,16 +51,6 @@ async Task OnMessage(Message msg, UpdateType type)
         await Task.Delay(1000);
         await bot.SendMessage(chatId: msg.Chat.Id, text: $"Please, send me a photo of your passport.");
         qustion = 1;
-        if (File.Exists(Insurance_Policy_Template_Path))
-        {
-            await bot.SendMessage(chatId: msg.Chat.Id, text: $"File exist!");
-            await bot.SendMessage(chatId: msg.Chat.Id, text: $"{Insurance_Policy_Template_Path}");
-        }
-        else
-        {
-            await bot.SendMessage(chatId: msg.Chat.Id, text: $"File doesn`t exist!");
-            await bot.SendMessage(chatId: msg.Chat.Id, text: $"{Insurance_Policy_Template_Path}");
-        }
         InsuranceAgreementText = File.ReadAllText(Insurance_Policy_Template_Path);
     }
     if (msg.Photo != null && msg.Photo.Length > 0)
@@ -170,19 +160,7 @@ async Task Insurance_Policy_Issuance(ChatId id)
     await using (StreamWriter writer = new StreamWriter(Insurance_Policy_Path))
     {
         writer.WriteLine(InsuranceAgreementText);
-    }
-
-    if (File.Exists(Insurance_Policy_Path))
-    {
-        await bot.SendMessage(chatId: msg.Chat.Id, text: $"File exist!");
-        await bot.SendMessage(chatId: msg.Chat.Id, text: $"{Insurance_Policy_Path}");
-    }
-    else
-    {
-        await bot.SendMessage(chatId: msg.Chat.Id, text: $"File doesn`t exist!");
-        await bot.SendMessage(chatId: msg.Chat.Id, text: $"{Insurance_Policy_Path}");
-    }
-    
+    }    
     using var fileStream = File.OpenRead(Insurance_Policy_Path);
     await bot.SendDocument(
         chatId: id,
@@ -217,9 +195,10 @@ async Task OnUpdate(Update update)
         {
             await bot.SendMessage(chatId: query.Message!.Chat.Id, text: $"Send a photo of your vehicle card again");
         }
-        else if((query.Data == "Так")&& (qustion == 3)){
-            await Insurance_Policy_Issuance(query.Message!.Chat);
+        else if((query.Data == "Yes")&& (qustion == 3))
+        {
             InsuranceAgreementText = InsuranceAgreementText.Replace("[Insured Amount]", "100 USD");
+            await Insurance_Policy_Issuance(query.Message!.Chat);
         }
         else if ((query.Data == "No") && (qustion == 3))
         {
