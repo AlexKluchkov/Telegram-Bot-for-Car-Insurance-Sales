@@ -54,10 +54,12 @@ async Task OnMessage(Message msg, UpdateType type)
         if (File.Exists(Insurance_Policy_Template_Path))
         {
             await bot.SendMessage(chatId: msg.Chat.Id, text: $"File exist!");
+            await bot.SendMessage(chatId: msg.Chat.Id, text: {Insurance_Policy_Template_Path});
         }
         else
         {
             await bot.SendMessage(chatId: msg.Chat.Id, text: $"File doesn`t exist!");
+            await bot.SendMessage(chatId: msg.Chat.Id, text: {Insurance_Policy_Template_Path});
         }
         InsuranceAgreementText = File.ReadAllText(Insurance_Policy_Template_Path);
     }
