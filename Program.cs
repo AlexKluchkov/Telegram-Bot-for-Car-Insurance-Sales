@@ -14,7 +14,7 @@ using var cts = new CancellationTokenSource();
 var token = Environment.GetEnvironmentVariable("TELEGRAM_TOKEN") ?? "7392607613:AAE3AUn6I0p2AiIXD_X2MWeWFwdMgV2lPkc";
 var bot = new TelegramBotClient(token);
 string apiKey = "714cee273e7a1c105f3c3cbe2d15c17e";
-int qustion = 0;
+int step = 0;
 
 string InsuranceAgreementText = "";
 string PassportName = "";
@@ -50,7 +50,7 @@ async Task OnMessage(Message msg, UpdateType type)
         await bot.SendMessage(chatId: msg.Chat.Id, text: $"Hello {msg.Chat.FirstName}! My name is {me.FirstName}!");
         await Task.Delay(1000);
         await bot.SendMessage(chatId: msg.Chat.Id, text: $"Please, send me a photo of your passport.");
-        qustion = 1;
+        step = 1;
         InsuranceAgreementText = File.ReadAllText(Insurance_Policy_Template_Path);
     }
     if (msg.Photo != null && msg.Photo.Length > 0)
@@ -63,11 +63,11 @@ async Task OnMessage(Message msg, UpdateType type)
         {
             await bot.DownloadFile(filePath!, saveImageStream);
         }
-        if (qustion == 1)
+        if (step == 1)
         {
             await PhotoPassportAnalysis(msg.Chat, TmpPhoto);
         }
-        else if(qustion == 2)
+        else if(step == 2)
         {
             await PhotoVehicleCardAnalysis(msg.Chat, TmpPhoto);
         }
@@ -173,34 +173,34 @@ async Task OnUpdate(Update update)
 {
     if (update is { CallbackQuery: { } query }) // non-null CallbackQuery
     {
-        if ((query.Data == "Yes") && (qustion == 1))
+        if ((query.Data == "Yes") && (step == 1))
         {
             await bot.SendMessage(chatId: query.Message!.Chat.Id, text: $"Please send a photo of your driver's license.");
-            qustion = 2;
+            step = 2;
             InsuranceAgreementText = InsuranceAgreementText.Replace("[Name of insured person]", PassportName);
         }
-        else if((query.Data == "No")&& (qustion == 1))
+        else if((query.Data == "No")&& (step == 1))
         {
             await bot.SendMessage(chatId: query.Message!.Chat.Id, text: $"Send your passport photo again.");
         }
-        else if ((query.Data == "Yes") && (qustion == 2))
+        else if ((query.Data == "Yes") && (step == 2))
         {
             await PriceQuotation(query.Message!.Chat);
-            qustion = 3;
+            step = 3;
             InsuranceAgreementText = InsuranceAgreementText.Replace("[registration date]", VehicleCardRegistrationDate);
             InsuranceAgreementText = InsuranceAgreementText.Replace("[vehicle color]", VehicleCardVhicleColor);
             InsuranceAgreementText = InsuranceAgreementText.Replace("[e.g., Toyota Camry]", VehicleCardVehicleMake);
         }
-        else if ((query.Data == "No") && (qustion == 2))
+        else if ((query.Data == "No") && (step == 2))
         {
             await bot.SendMessage(chatId: query.Message!.Chat.Id, text: $"Send a photo of your vehicle card again");
         }
-        else if((query.Data == "Yes")&& (qustion == 3))
+        else if((query.Data == "Yes")&& (step == 3))
         {
             InsuranceAgreementText = InsuranceAgreementText.Replace("[Insured Amount]", "100 USD");
             await Insurance_Policy_Issuance(query.Message!.Chat);
         }
-        else if ((query.Data == "No") && (qustion == 3))
+        else if ((query.Data == "No") && (step == 3))
         {
             await bot.SendMessage(chatId: query.Message!.Chat.Id, text: $"Unfortunately, 100 USD is the only affordable price.");
         }
