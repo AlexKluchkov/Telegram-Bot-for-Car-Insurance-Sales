@@ -1,10 +1,10 @@
 AUTO INSURANCE POLICY No. [Policy Number]
 Auto Insurance Agreement (Comprehensive / Liability)
 1. INSURER
-Company Name: “Company”
-Legal Address: “Company Address”
-Tax ID / Registration No.: “Tax ID / Registration”
-Phone / Email: “Contact Information”
+Company Name: -
+Legal Address: -
+Tax ID / Registration No.: -
+Phone / Email: -
 2. INSURED PERSON
 Full Name: [Name of insured person]
 Relationship to Policyholder: Owner
