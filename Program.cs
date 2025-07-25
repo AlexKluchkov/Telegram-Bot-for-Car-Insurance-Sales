@@ -22,7 +22,8 @@ string VehicleCardRegistrationDate = "";
 string VehicleCardVhicleColor = "";
 string VehicleCardVehicleMake = "";
 
-string Insurance_Policy_Template_Path = Path.Combine(AppContext.BaseDirectory, "Auto_Insurance_Policy_Template.txt");
+var basePath = AppContext.BaseDirectory;
+var Insurance_Policy_Template_Path = Path.Combine(basePath, "Auto_Insurance_Policy_Template.txt");
 string Insurance_Policy_Path = Path.Combine(AppContext.BaseDirectory, "Auto_Insurance_Policy.txt");
 
 var me = await bot.GetMe();
