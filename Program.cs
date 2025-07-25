@@ -13,7 +13,7 @@ using Telegram.Bot.Types.ReplyMarkups;
 using var cts = new CancellationTokenSource();
 var token = Environment.GetEnvironmentVariable("TELEGRAM_TOKEN");
 var bot = new TelegramBotClient(token);
-string apiKey = "714cee273e7a1c105f3c3cbe2d15c17e";
+var apiKey = Environment.GetEnvironmentVariable("MINDEE_TOKEN");
 int step = 0;
 
 string InsuranceAgreementText = "";
