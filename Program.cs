@@ -53,7 +53,7 @@ async Task OnMessage(Message msg, UpdateType type)
         step = 1;
         InsuranceAgreementText = File.ReadAllText(Insurance_Policy_Template_Path);
     }
-    if (msg.Photo != null && msg.Photo.Length > 0)
+    else if (msg.Photo != null && msg.Photo.Length > 0)
     {
         var photo = msg.Photo.Last();
         var file = await bot.GetFile(photo.FileId);
@@ -76,7 +76,12 @@ async Task OnMessage(Message msg, UpdateType type)
             File.Delete(TmpPhoto); //Delete temporary file
         }
     }
-
+    else if (msg.Text != null)  //AI
+    {
+        TelegramBotAI botAI = new TelegramBotAI();
+        var reply = await botAI.GetAiResponseAsync(msg.Text);
+        await bot.SendMessage(chatId: msg.Chat.Id, text: reply ?? "Unable to get response from AI");
+    }
 }
 
 async Task PhotoPassportAnalysis(ChatId id, string TmpPhoto) 
