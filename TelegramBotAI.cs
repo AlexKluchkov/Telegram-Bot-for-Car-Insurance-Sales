@@ -17,7 +17,8 @@ class TelegramBotAI()
             model = "openrouter/horizon-alpha",
             messages = new[]
             {
-            new { role = "user", content = prompt }
+                new { role = "system", content = "You are an AI consultant selling car insurance. Answer briefly, professionally and clearly." },
+                new { role = "user", content = userPrompt }
             }
         };
 
