@@ -10,7 +10,6 @@ using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
-
 using var cts = new CancellationTokenSource();
 var token = Environment.GetEnvironmentVariable("TELEGRAM_TOKEN");
 var bot = new TelegramBotClient(token);
@@ -25,6 +24,8 @@ string VehicleCardVehicleMake = "";
 
 string Insurance_Policy_Template_Path = Path.Combine(AppContext.BaseDirectory, "Auto_Insurance_Policy_Template.txt");
 string Insurance_Policy_Path = "Auto_Insurance_Policy.txt";
+
+TelegramBotAI botAI = new TelegramBotAI();
 
 var me = await bot.GetMe();
 
@@ -53,6 +54,8 @@ async Task OnMessage(Message msg, UpdateType type)
         await bot.SendMessage(chatId: msg.Chat.Id, text: $"Please, send me a photo of your passport.");
         step = 1;
         InsuranceAgreementText = File.ReadAllText(Insurance_Policy_Template_Path);
+        var reply = await botAI.GetAiResponseAsync("Imagine you are a car insurance salesman. Keep your answers short and polite.");
+        await bot.SendMessage(chatId: msg.Chat.Id, text: reply);
     }
     else if (msg.Photo != null && msg.Photo.Length > 0)
     {
@@ -79,7 +82,6 @@ async Task OnMessage(Message msg, UpdateType type)
     }
     else if (msg.Text != null)  //AI
     {
-        TelegramBotAI botAI = new TelegramBotAI();
         var reply = await botAI.GetAiResponseAsync(msg.Text);
         await bot.SendMessage(chatId: msg.Chat.Id, text: reply ?? "Unable to get response from AI");
     }
