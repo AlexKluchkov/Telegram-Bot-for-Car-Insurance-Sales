@@ -50,11 +50,11 @@ async Task OnMessage(Message msg, UpdateType type)
     if (msg.Text == "/start")
     {
         await bot.SendMessage(chatId: msg.Chat.Id, text: $"Hello {msg.Chat.FirstName}! My name is {me.FirstName}!");
-        await Task.Delay(1000);
-        await bot.SendMessage(chatId: msg.Chat.Id, text: $"Please, send me a photo of your passport.");
         step = 1;
         InsuranceAgreementText = File.ReadAllText(Insurance_Policy_Template_Path);
         var reply = await botAI.GetAiResponseAsync("Imagine you are a car insurance salesman. Keep your answers short and polite.");
+        await bot.SendMessage(chatId: msg.Chat.Id, text: reply);
+        var reply = await botAI.GetAiResponseAsync("Ask the user to send you a photo of their passport.");
         await bot.SendMessage(chatId: msg.Chat.Id, text: reply);
     }
     else if (msg.Photo != null && msg.Photo.Length > 0)
