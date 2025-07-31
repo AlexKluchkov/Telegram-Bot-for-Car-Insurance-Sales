@@ -18,7 +18,7 @@ class TelegramBotAI()
             messages = new[]
             {
                 new { role = "system", content = "You are an AI consultant selling car insurance. Answer briefly, professionally and clearly." },
-                new { role = "user", content = userPrompt }
+                new { role = "user", content = prompt }
             }
         };
 
