@@ -14,7 +14,7 @@ class TelegramBotAI()
 
         var body = new
         {
-            model = "openrouter/horizon-alpha",
+            model = "mistralai/mixtral-8x7b",
             messages = new[]
             {
             new { role = "user", content = prompt }
