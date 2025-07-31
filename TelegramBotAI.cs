@@ -6,7 +6,7 @@ using System.Text.Json;
 
 class TelegramBotAI()
 {
-    private string apiKey = "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";
+    private string apiKey = "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";
     public async Task<string?> GetAiResponseAsync(string prompt)
     {
         using var http = new HttpClient();
