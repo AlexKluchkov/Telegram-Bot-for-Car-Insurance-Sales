@@ -9,6 +9,8 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using QuestPDF.Fluent;
+using QuestPDF.Infrastructure;
 
 using var cts = new CancellationTokenSource();
 var token = Environment.GetEnvironmentVariable("TELEGRAM_TOKEN");
