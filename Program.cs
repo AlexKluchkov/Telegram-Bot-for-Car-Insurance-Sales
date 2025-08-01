@@ -54,8 +54,6 @@ async Task OnMessage(Message msg, UpdateType type)
         await bot.SendMessage(chatId: msg.Chat.Id, text: $"Please, send me a photo of your passport.");
         step = 1;
         InsuranceAgreementText = File.ReadAllText(Insurance_Policy_Template_Path);
-        //reply = await botAI.GetAiResponseAsync("Imagine that you already ask the user to send you a photo of their passport.");
-        //await bot.SendMessage(chatId: msg.Chat.Id, text: reply);
     }
     else if (msg.Photo != null && msg.Photo.Length > 0)
     {
