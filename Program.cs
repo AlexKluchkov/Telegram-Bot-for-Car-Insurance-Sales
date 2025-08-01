@@ -44,7 +44,7 @@ Task OnError(Exception exception, HandleErrorSource source)
     Console.WriteLine(exception); 
     return Task.CompletedTask;
 }
-
+string reply;
 async Task OnMessage(Message msg, UpdateType type)
 {
     if (msg.Text == "/start")
@@ -54,8 +54,6 @@ async Task OnMessage(Message msg, UpdateType type)
         await bot.SendMessage(chatId: msg.Chat.Id, text: $"Please, send me a photo of your passport.");
         step = 1;
         InsuranceAgreementText = File.ReadAllText(Insurance_Policy_Template_Path);
-        var reply = await botAI.GetAiResponseAsync("Imagine you are a car insurance salesman. Keep your answers short and polite.");
-        await bot.SendMessage(chatId: msg.Chat.Id, text: reply);
     }
     else if (msg.Photo != null && msg.Photo.Length > 0)
     {
@@ -82,7 +80,7 @@ async Task OnMessage(Message msg, UpdateType type)
     }
     else if (msg.Text != null)  //AI
     {
-        var reply = await botAI.GetAiResponseAsync(msg.Text);
+        reply = await botAI.GetAiResponseAsync(msg.Text);
         await bot.SendMessage(chatId: msg.Chat.Id, text: reply ?? "Unable to get response from AI");
     }
 }
