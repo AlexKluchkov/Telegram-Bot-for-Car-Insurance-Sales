@@ -166,7 +166,7 @@ async Task PriceQuotation(ChatId id)
 async Task Insurance_Policy_Issuance(ChatId id)
 {
     QuestPDF.Settings.License = LicenseType.Community;
-    Document.Create(container =>
+    QuestPDF.Fluent.Document.Create(container =>
     {
         QuestPDF.Settings.License = LicenseType.Community;
         container.Page(page =>
