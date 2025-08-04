@@ -27,12 +27,6 @@ class TelegramBotAI()
 
         var response = await http.PostAsync("https://openrouter.ai/api/v1/chat/completions", content);
 
-        if (!response.IsSuccessStatusCode)
-        {
-            Console.WriteLine("Ошибка API: " + await response.Content.ReadAsStringAsync());
-            return null;
-        }
-
         var responseBody = await response.Content.ReadAsStringAsync();
         using var doc = JsonDocument.Parse(responseBody);
 
@@ -45,3 +39,4 @@ class TelegramBotAI()
 
 
 }
+

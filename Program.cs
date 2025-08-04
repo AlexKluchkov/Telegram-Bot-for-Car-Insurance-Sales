@@ -1,3 +1,4 @@
+
 using System;
 using Mindee;
 using Mindee.Http;
@@ -9,6 +10,8 @@ using Telegram.Bot.Polling;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using QuestPDF.Fluent;
+using QuestPDF.Infrastructure;
 
 using var cts = new CancellationTokenSource();
 var token = Environment.GetEnvironmentVariable("TELEGRAM_TOKEN");
@@ -23,7 +26,7 @@ string VehicleCardVhicleColor = "";
 string VehicleCardVehicleMake = "";
 
 string Insurance_Policy_Template_Path = Path.Combine(AppContext.BaseDirectory, "Auto_Insurance_Policy_Template.txt");
-string Insurance_Policy_Path = "Auto_Insurance_Policy.txt";
+string Insurance_Policy_Path = "Auto_Insurance_Policy.pdf";
 
 TelegramBotAI botAI = new TelegramBotAI();
 
@@ -163,10 +166,22 @@ async Task PriceQuotation(ChatId id)
 
 async Task Insurance_Policy_Issuance(ChatId id)
 {
-    await using (StreamWriter writer = new StreamWriter(Insurance_Policy_Path))
+    QuestPDF.Settings.License = LicenseType.Community;
+    QuestPDF.Fluent.Document.Create(container =>
     {
-        writer.WriteLine(InsuranceAgreementText);
-    }    
+        QuestPDF.Settings.License = LicenseType.Community;
+        container.Page(page =>
+        {
+            page.Content()
+                .Padding(50)
+                .Column(col =>
+                {
+                    col.Item().Text(InsuranceAgreementText).FontSize(20);
+                });
+        });
+    })
+    .GeneratePdf(Insurance_Policy_Path);
+    
     using var fileStream = File.OpenRead(Insurance_Policy_Path);
     await bot.SendDocument(
         chatId: id,
