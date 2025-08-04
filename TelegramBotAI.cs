@@ -14,7 +14,7 @@ class TelegramBotAI()
 
         var body = new
         {
-            model = "openrouter/horizon-alpha",
+            model = "openrouter/horizon-beta",
             messages = new[]
             {
                 new { role = "system", content = "You are an AI consultant selling car insurance. Answer briefly, professionally and clearly." },
@@ -44,5 +44,6 @@ class TelegramBotAI()
 
 
 }
+
 
 
