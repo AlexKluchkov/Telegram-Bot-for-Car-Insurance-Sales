@@ -25,6 +25,8 @@ string VehicleCardRegistrationDate = "";
 string VehicleCardVhicleColor = "";
 string VehicleCardVehicleMake = "";
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+
 string Insurance_Policy_Template_Path = Path.Combine(AppContext.BaseDirectory, "Auto_Insurance_Policy_Template.txt");
 string Insurance_Policy_Path = "Auto_Insurance_Policy.pdf";
 
@@ -227,5 +229,6 @@ async Task OnUpdate(Update update)
         }
     }
 }
+
 
 
