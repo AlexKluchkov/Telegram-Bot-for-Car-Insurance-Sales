@@ -14,7 +14,7 @@ class TelegramBotAI()
 
         var body = new
         {
-            model = "openrouter/horizon-alpha",
+            model = "openrouter/horizon-beta",
             messages = new[]
             {
                 new { role = "system", content = "You are an AI consultant selling car insurance. Answer briefly, professionally and clearly." },
@@ -26,7 +26,12 @@ class TelegramBotAI()
         var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 
         var response = await http.PostAsync("https://openrouter.ai/api/v1/chat/completions", content);
-
+        if (!response.IsSuccessStatusCode)
+        {
+            Console.WriteLine("Error API: " + await response.Content.ReadAsStringAsync());
+            return null;
+        }
+        
         var responseBody = await response.Content.ReadAsStringAsync();
         using var doc = JsonDocument.Parse(responseBody);
 
@@ -39,4 +44,7 @@ class TelegramBotAI()
 
 
 }
+
+
+
 
