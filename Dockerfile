@@ -14,6 +14,5 @@ WORKDIR /app
 COPY --from=build /out ./
 COPY Auto_Insurance_Policy_Template.txt ./
 
-ENV ASPNETCORE_URLS=http://+:$PORT
 
 ENTRYPOINT ["dotnet", "BotForCarInsuranceSales.dll"]
