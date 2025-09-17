@@ -13,9 +13,6 @@ using Telegram.Bot.Types.ReplyMarkups;
 using QuestPDF.Fluent;
 using QuestPDF.Infrastructure;
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
-builder.WebHost.UseUrls($"http://+:{port}");
-
 using var cts = new CancellationTokenSource();
 var token = Environment.GetEnvironmentVariable("TELEGRAM_TOKEN");
 var bot = new TelegramBotClient(token);
@@ -234,6 +231,7 @@ async Task OnUpdate(Update update)
         }
     }
 }
+
 
 
 
