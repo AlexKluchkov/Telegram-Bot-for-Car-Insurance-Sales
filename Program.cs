@@ -28,13 +28,12 @@ string VehicleCardRegistrationDate = "";
 string VehicleCardVhicleColor = "";
 string VehicleCardVehicleMake = "";
 
-var builder = WebApplication.CreateBuilder(args);
-var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
-builder.WebHost.UseUrls($"http://+:{port}");
-var app = builder.Build();
-
 string Insurance_Policy_Template_Path = Path.Combine(AppContext.BaseDirectory, "Auto_Insurance_Policy_Template.txt");
 string Insurance_Policy_Path = "Auto_Insurance_Policy.pdf";
+
+int port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+TcpListener listener = new TcpListener(IPAddress.Any, port);
+listener.Start();
 
 TelegramBotAI botAI = new TelegramBotAI();
 
@@ -235,6 +234,7 @@ async Task OnUpdate(Update update)
         }
     }
 }
+
 
 
 
