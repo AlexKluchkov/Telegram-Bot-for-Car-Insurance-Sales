@@ -23,6 +23,7 @@ var apiKey = Environment.GetEnvironmentVariable("MINDEE_TOKEN");
 int step = 0;
 
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+builder.WebHost.UseUrls($"http://+:{port}");
 
 string InsuranceAgreementText = "";
 string PassportName = "";
@@ -232,6 +233,7 @@ async Task OnUpdate(Update update)
         }
     }
 }
+
 
 
 
