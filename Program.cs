@@ -22,6 +22,8 @@ var bot = new TelegramBotClient(token);
 var apiKey = Environment.GetEnvironmentVariable("MINDEE_TOKEN");
 int step = 0;
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+
 string InsuranceAgreementText = "";
 string PassportName = "";
 string VehicleCardRegistrationDate = "";
@@ -230,6 +232,7 @@ async Task OnUpdate(Update update)
         }
     }
 }
+
 
 
 
